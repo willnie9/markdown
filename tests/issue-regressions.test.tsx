@@ -159,4 +159,13 @@ describe('GitHub issue triage', () => {
     expect(normalizeStaticMarkup(react)).toBe(normalizeStaticMarkup(renderHtml(document, htmlOptions)))
     expect(normalizeStaticMarkup(octane)).toBe(normalizeStaticMarkup(react))
   })
+
+  it('produces a hard line break for two or more trailing spaces before a newline', () => {
+    expect(renderAll('a  \nb')).toBe('<p>a<br>b</p>')
+    expect(renderAll('a   \nb')).toBe('<p>a<br>b</p>')
+    expect(renderAll('a  \r\nb')).toBe('<p>a<br>b</p>')
+    expect(renderAll('a \nb')).toBe('<p>a\nb</p>')
+    expect(renderAll('a  \n')).toBe('<p>a</p>')
+    expect(renderReact(createReactElement(ReactMarkdown, { children: 'a  \nb' }))).toBe('<p>a<br/>b</p>')
+  })
 })

@@ -31,7 +31,7 @@ interface InlineParseBudget {
 
 const maxInlineDepth = 32
 const scansPerCharacter = 16
-const inlineMarker = /[\\`!\[_*~<]/g
+const inlineMarker = /[\\`!\[_*~<]| {2,}\n/g
 
 function parseInlineRaw(
   value: string,
@@ -59,6 +59,17 @@ function parseInlineRaw(
   scan: while (index < value.length) {
     const char = value[index]!
     const next = value[index + 1]
+
+    if (char === ' ' && next === ' ') {
+      let end = index + 2
+      while (value[end] === ' ') end++
+      if (value[end] === '\n') {
+        pushText()
+        nodes.push({ type: 'break' })
+        index = end + 1
+        continue
+      }
+    }
 
     if (char === '\\') {
       if (next === '\n') {

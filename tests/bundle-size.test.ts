@@ -22,14 +22,14 @@ describe('bundle budgets', () => {
     // Node 24 ceilings include the bounded Unicode blockquote fix.
     // Separately imported extension ceilings are unchanged.
     for (const [result, min, gzip, brotli] of [
-      [parser, 12649, 5220, 4823],
-      [html, 17840, 7050, 6485],
-      [react, 17848, 7001, 6478],
-      [octane, 17785, 6967, 6438],
-      [pluggable, 17876, 7070, 6477],
+      [parser, 12819, 5310, 4900],
+      [html, 18010, 7140, 6570],
+      [react, 18018, 7095, 6565],
+      [octane, 17955, 7060, 6525],
+      [pluggable, 18046, 7160, 6565],
       [streaming, 699, 311, 253],
       [callouts, 506, 335, 278],
-      [reactStreaming, 18540, 7186, 6623],
+      [reactStreaming, 18710, 7275, 6710],
       [docs, 6423, 2292, 2073],
       [tabs, 3290, 1221, 1082],
     ] as const) {
@@ -42,12 +42,12 @@ describe('bundle budgets', () => {
 
   it('also protects the complete namespace of every public entry point', async () => {
     const budgets: Record<string, number[]> = {
-      '.': [18105, 7177, 6596],
-      './html': [18065, 7164, 6582],
-      './html/streaming': [19605, 7694, 7083],
-      './parser': [12782, 5307, 4886],
-      './react': [18048, 7111, 6563],
-      './octane': [17988, 7076, 6508],
+      '.': [18275, 7270, 6680],
+      './html': [18235, 7255, 6670],
+      './html/streaming': [19775, 7785, 7170],
+      './parser': [12952, 5400, 4975],
+      './react': [18218, 7205, 6650],
+      './octane': [18158, 7170, 6595],
       './extensions/autolinks': [994, 632, 568],
       './extensions/callouts': [660, 432, 360],
       './extensions/comment-components': [1073, 647, 542],

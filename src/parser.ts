@@ -342,13 +342,16 @@ function createBlockParser(
       const line = current()
       if (isBlank(line)) break
       if (lines.length > 0 && isBlockStart(line, next())) break
-      lines.push(line.trim())
+      lines.push(line.trimStart())
       cursor++
     }
 
     return {
       type: 'paragraph',
-      children: parseInline(lines.join('\n'), options),
+      children: parseInline(
+        lines.join('\n').replace(/ +\n/g, m => m.length > 2 ? m : '\n').trimEnd(),
+        options,
+      ),
     }
   }
 
